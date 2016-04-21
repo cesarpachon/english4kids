@@ -1,1 +1,1 @@
-singleplayer:::1461275578
+singleplayer::server,fly,teleport,password,noclip,interact,shout,privs,fast,basic_privs,bring,rollback,kick,give,settime,ban:1461277210

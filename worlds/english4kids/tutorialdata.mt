@@ -1,1 +1,1 @@
-return {["last_diamond"] = false, ["first_join"] = true, ["first_gold"] = true, ["first_diamond"] = false, ["last_gold"] = false}
+return {["last_diamond"] = false, ["first_gold"] = true, ["first_join"] = false, ["first_diamond"] = false, ["last_gold"] = false}

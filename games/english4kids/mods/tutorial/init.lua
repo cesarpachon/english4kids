@@ -132,7 +132,7 @@ tutorial.diamonds = 12
 	
 tutorial.texts = {}
 tutorial.texts.intro =
-[[Welcome! This tutorial will teach you the most crucial basics of Minetest.
+[[Bienvenido! This tutorial will teach you the most crucial basics of Minetest.
 This tutorial assumes that you have not changed the default keybindings yet.
 
 Let's start for the most important keybindings right now:

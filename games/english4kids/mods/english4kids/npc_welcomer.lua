@@ -1,25 +1,26 @@
 -- NPC max walk speed
-walk_limit = 1
+walk_limit = 2
 --npc just walking around
-chillaxin_speed = .5
+chillaxin_speed = 1.5
 -- Player animation speed
-animation_speed = 15
+animation_speed = 30
 
 -- Player animation blending
 -- Note: This is currently broken due to a bug in Irrlicht, leave at 0
 animation_blend = 0
 
 -- Default player appearance
-default_model_dwarf = "character.x"
-available_npc_textures_dwarf = {
-	dwarf_texture_1 = {"dwarf_commoner.png"},
-	dwarf_texture_2 = {"dwarf_girl.png"},
-	dwarf_texture_3 = {"dwarf_king.png"},
-	dwarf_texture_4 = {"dwarf_warrior.png"}
+default_model_def = "character.x"
+available_npc_textures_def = {
+	def_texture_1 = {"miner.png"},
+	def_texture_2 = {"archer.png"},
+	def_texture_3 = {"cool_girl.png"},
+	def_texture_4 = {"builder.png"},
+	def_texture_5 = {"panda_girl.png"}
 }
 
 -- Frame ranges for each player model
-function npc_get_animations_dwarf(model)
+function npc_get_animations_def(model)
 	if model == "character.x" then
 		return {
 		stand_START = 0,
@@ -48,24 +49,23 @@ local ANIM_WALK  = 4
 local ANIM_WALK_MINE = 5
 local ANIM_MINE = 6
 
-function npc_update_visuals_dwarf(self)
+function npc_update_visuals_def(self)
 	--local name = get_player_name()
-	visual = default_model_dwarf
+	visual = default_model_def
 	npc_anim = 0 -- Animation will be set further below immediately
 	--npc_sneak[name] = false
 	prop = {
-		mesh = default_model_dwarf,
+		mesh = default_model_def,
 		textures = default_textures,
-		textures = available_npc_textures_dwarf["dwarf_texture_"..math.random(1,4)],
-		visual_size = {x=.5, y=.5, z=.5},
+		textures = available_npc_textures_def["def_texture_"..math.random(1,5)],
+		visual_size = {x=1, y=1, z=1},
 	}
 	self.object:set_properties(prop)
 end
 
-NPC_ENTITY_DWARF = {
+NPC_ENTITY_DEF = {
 	physical = true,
-	lightsource = 5,
-	collisionbox = {-0.15,-0.5,-0.15, 0.15,0.4,0.15},
+	collisionbox = {-0.3,-1.0,-0.3, 0.3,0.8,0.3},
 	visual = "mesh",
 	mesh = "character.x",
 	textures = {"character.png"},
@@ -82,21 +82,24 @@ NPC_ENTITY_DWARF = {
 	attacking_timer = 0
 }
 
-NPC_ENTITY_DWARF.on_activate = function(self)
-	npc_update_visuals_dwarf(self)
-	self.anim = npc_get_animations_dwarf(visual)
+NPC_ENTITY_DEF.on_activate = function(self)
+	print("*** on_activate begin ***")
+  npc_update_visuals_def(self)
+	self.anim = npc_get_animations_def(visual)
 	self.object:set_animation({x=self.anim.stand_START,y=self.anim.stand_END}, animation_speed_mod, animation_blend)
 	self.npc_anim = ANIM_STAND
 	self.object:setacceleration({x=0,y=-10,z=0})
 	self.state = 1
-	self.object:set_hp(75)
+	self.object:set_hp(50)
+	print("*** on_activate end ***")
 end
 
-NPC_ENTITY_DWARF.on_punch = function(self, puncher)
+NPC_ENTITY_DEF.on_punch = function(self, puncher)
 	for  _,object in ipairs(minetest.env:get_objects_inside_radius(self.object:getpos(), 5)) do
 		if not object:is_player() then
-			if object:get_luaentity().name == "peaceful_npc:npc_dwarf" then
-				object:get_luaentity().state = 3
+			if object:get_luaentity().name == "english4kids:npc_welcomer" then
+				print("hello! can you help me?")
+        object:get_luaentity().state = 3
 				object:get_luaentity().attacker = puncher:get_player_name()
 			end
 		end
@@ -108,11 +111,11 @@ NPC_ENTITY_DWARF.on_punch = function(self, puncher)
 	end
 
 	if self.object:get_hp() == 0 then
-	    local obj = minetest.env:add_item(self.object:getpos(), "default:stone_with_mese 12")
+	    local obj = minetest.env:add_item(self.object:getpos(), "default:stone_with_iron 10")
 	end
 end
 
-NPC_ENTITY_DWARF.on_step = function(self, dtime)
+NPC_ENTITY_DEF.on_step = function(self, dtime)
 	self.timer = self.timer + 0.01
 	self.turn_timer = self.turn_timer + 0.01
 	self.jump_timer = self.jump_timer + 0.01
@@ -127,7 +130,7 @@ NPC_ENTITY_DWARF.on_step = function(self, dtime)
 
 	self.time_passed = self.time_passed + dtime
 
-	if self.time_passed >= 15 then
+	if self.time_passed >= 5 then
 		self.object:remove()
 	else
 	if current_node.name == "default:water_source" or
@@ -198,7 +201,7 @@ end
 		end
 		self.object:setvelocity({x=0,y=self.object:getvelocity().y,z=0})
 		if self.npc_anim ~= ANIM_STAND then
-			self.anim = npc_get_animations_dwarf(visual)
+			self.anim = npc_get_animations_def(visual)
 			self.object:set_animation({x=self.anim.stand_START,y=self.anim.stand_END}, animation_speed_mod, animation_blend)
 			self.npc_anim = ANIM_STAND
 		end
@@ -221,7 +224,7 @@ end
 			--self.object:setacceleration(self.direction)
 		end
 		if self.npc_anim ~= ANIM_WALK then
-			self.anim = npc_get_animations_dwarf(visual)
+			self.anim = npc_get_animations_def(visual)
 			self.object:set_animation({x=self.anim.walk_START,y=self.anim.walk_END}, animation_speed_mod, animation_blend)
 			self.npc_anim = ANIM_WALK
 		end
@@ -243,7 +246,7 @@ end
 		if self.direction ~= nil then
 			if self.jump_timer > 0.3 then
 				if minetest.env:get_node({x=self.object:getpos().x + self.direction.x,y=self.object:getpos().y-1,z=self.object:getpos().z + self.direction.z}).name ~= "air" then
-					self.object:setvelocity({x=self.object:getvelocity().x,y=2.5,z=self.object:getvelocity().z})
+					self.object:setvelocity({x=self.object:getvelocity().x,y=5,z=self.object:getvelocity().z})
 					self.jump_timer = 0
 				end
 			end
@@ -252,7 +255,7 @@ end
 	--WANDERING CONSTANTLY AT NIGHT
 	if self.state == 4 then
 		if self.npc_anim ~= ANIM_WALK then
-			self.anim = npc_get_animations_dwarf(visual)
+			self.anim = npc_get_animations_def(visual)
 			self.object:set_animation({x=self.anim.walk_START,y=self.anim.walk_END}, animation_speed_mod, animation_blend)
 			self.npc_anim = ANIM_WALK
 		end
@@ -309,7 +312,7 @@ end
 			self.direction = {x = math.sin(self.yaw)*-1, y = -10, z = math.cos(self.yaw)}
 		end
 		if self.npc_anim ~= ANIM_WALK then
-			self.anim = npc_get_animations_dwarf(visual)
+			self.anim = npc_get_animations_def(visual)
 			self.object:set_animation({x=self.anim.walk_START,y=self.anim.walk_END}, animation_speed_mod, animation_blend)
 			self.npc_anim = ANIM_WALK
 		end
@@ -334,7 +337,7 @@ end
 			if self.jump_timer > 0.3 then
 				--print(dump(minetest.env:get_node({x=self.object:getpos().x + self.direction.x,y=self.object:getpos().y-1,z=self.object:getpos().z + self.direction.z})))
 				if minetest.env:get_node({x=self.object:getpos().x + self.direction.x,y=self.object:getpos().y-1,z=self.object:getpos().z + self.direction.z}).name ~= "air" then
-					self.object:setvelocity({x=self.object:getvelocity().x,y=5,z=self.object:getvelocity().z})
+					self.object:setvelocity({x=self.object:getvelocity().x,y=2.5,z=self.object:getvelocity().z})
 					self.jump_timer = 0
 				end
 			end
@@ -342,4 +345,4 @@ end
 	end
 end
 
-minetest.register_entity("peaceful_npc:npc_dwarf", NPC_ENTITY_DWARF)
+minetest.register_entity("english4kids:npc_welcomer", NPC_ENTITY_DEF)

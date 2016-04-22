@@ -51,5 +51,4 @@ load_mod_wine = false
 load_mod_woodsoils = false
 load_mod_youngtrees = false
 load_mod_biome_lib = true
-load_mod_peaceful_npc = true
-
+load_mod_english4kids = true

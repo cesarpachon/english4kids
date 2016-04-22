@@ -7,7 +7,7 @@ load_mod_3d_armor = false
 load_mod_3dmushrooms = false
 load_mod_along_shore = false
 load_mod_beer_test = false
-load_mod_biome_lib = false
+load_mod_biome_lib = true
 load_mod_bitchange = false
 load_mod_building_blocks = false
 load_mod_bushes = false
@@ -50,3 +50,6 @@ load_mod_wieldview = false
 load_mod_wine = false
 load_mod_woodsoils = false
 load_mod_youngtrees = false
+load_mod_biome_lib = true
+load_mod_peaceful_npc = true
+

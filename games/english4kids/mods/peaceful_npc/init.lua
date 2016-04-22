@@ -1,6 +1,6 @@
 --Config
 instakill_sword = false
-mode_debug = false
+mode_debug = true
 
 --Loads other files
 dofile(minetest.get_modpath("peaceful_npc").."/npc/npc_def.lua")

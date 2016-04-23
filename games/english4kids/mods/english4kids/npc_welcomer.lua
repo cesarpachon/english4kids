@@ -11,6 +11,8 @@ animation_blend = 0
 
 -- Default player appearance
 default_model_def = "character.x"
+
+--[[
 available_npc_textures_def = {
 	def_texture_1 = {"miner.png"},
 	def_texture_2 = {"archer.png"},
@@ -18,6 +20,7 @@ available_npc_textures_def = {
 	def_texture_4 = {"builder.png"},
 	def_texture_5 = {"panda_girl.png"}
 }
+]]--
 
 -- Frame ranges for each player model
 function npc_get_animations_def(model)
@@ -50,17 +53,18 @@ local ANIM_WALK_MINE = 5
 local ANIM_MINE = 6
 
 function npc_update_visuals_def(self)
-	--local name = get_player_name()
 	visual = default_model_def
 	npc_anim = 0 -- Animation will be set further below immediately
-	--npc_sneak[name] = false
-	prop = {
+	local prop = {
 		mesh = default_model_def,
-		textures = default_textures,
-		textures = available_npc_textures_def["def_texture_"..math.random(1,5)],
-		visual_size = {x=1, y=1, z=1},
-	}
+		textures = {"panda_girl.png"},
+    --textures = default_textures,
+		--textures = available_npc_textures_def["def_texture_"..math.random(1,5)],
+		visual_size = {x=1, y=1, z=1}
+    --armor_groups = {immortal = 1}
+  }
 	self.object:set_properties(prop)
+  self.object:set_armor_groups({immortal = 1})
 end
 
 NPC_ENTITY_DEF = {
@@ -68,7 +72,7 @@ NPC_ENTITY_DEF = {
 	collisionbox = {-0.3,-1.0,-0.3, 0.3,0.8,0.3},
 	visual = "mesh",
 	mesh = "character.x",
-	textures = {"character.png"},
+	textures = {"panda_girl.png"},
 	npc_anim = 0,
 	timer = 0,
 	turn_timer = 0,
@@ -83,7 +87,6 @@ NPC_ENTITY_DEF = {
 }
 
 NPC_ENTITY_DEF.on_activate = function(self)
-	print("*** on_activate begin ***")
   npc_update_visuals_def(self)
 	self.anim = npc_get_animations_def(visual)
 	self.object:set_animation({x=self.anim.stand_START,y=self.anim.stand_END}, animation_speed_mod, animation_blend)
@@ -91,7 +94,6 @@ NPC_ENTITY_DEF.on_activate = function(self)
 	self.object:setacceleration({x=0,y=-10,z=0})
 	self.state = 1
 	self.object:set_hp(50)
-	print("*** on_activate end ***")
 end
 
 NPC_ENTITY_DEF.on_punch = function(self, puncher)
@@ -182,8 +184,8 @@ end
 		for  _,object in ipairs(minetest.env:get_objects_inside_radius(self.object:getpos(), 3)) do
 			if object:is_player() then
 				self.yawwer = false
-				NPC = self.object:getpos()
-				PLAYER = object:getpos()
+				local NPC = self.object:getpos()
+				local PLAYER = object:getpos()
 				self.vec = {x=PLAYER.x-NPC.x, y=PLAYER.y-NPC.y, z=PLAYER.z-NPC.z}
 				self.yaw = math.atan(self.vec.z/self.vec.x)+math.pi^2
 				if PLAYER.x > NPC.x then

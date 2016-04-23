@@ -50,10 +50,6 @@ if(read==false) then
 	-- Is this the first time the player joins this e4k?
 	e4k.state.first_join = true
 	-- These variables store wheather a message for those events has been shown yet.
-	e4k.state.first_gold = false
-	e4k.state.last_gold = false
-	e4k.state.first_diamond = false
-	e4k.state.last_diamond = false
 end
 
 minetest.register_on_joinplayer(function()

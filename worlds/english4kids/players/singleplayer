@@ -1,17 +1,17 @@
 breath = 11
 hp = 20
 name = singleplayer
-pitch = 9.64
-position = (498.8,5,325.62)
+pitch = 18
+position = (492.55,5,347.5)
 version = 1
-yaw = 67.26
+yaw = 61.68
 PlayerArgsEnd
 List main 32
 Width 0
 Item default:stone_with_iron 99
 Item default:stone_with_coal 5
-Item default:stone_with_iron 51
-Empty
+Item default:stone_with_iron 99
+Item default:stone_with_iron 52
 Empty
 Empty
 Empty

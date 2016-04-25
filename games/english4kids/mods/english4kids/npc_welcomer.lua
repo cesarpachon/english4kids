@@ -97,9 +97,13 @@ NPC_ENTITY_DEF.on_activate = function(self)
 end
 
 NPC_ENTITY_DEF.on_punch = function(self, puncher)
+	if puncher:is_player() then
+    minetest.chat_send_player(puncher:get_player_name(), "Hello ".. puncher:get_player_name()..", can you help me?")
+  end
+  --[[
 	for  _,object in ipairs(minetest.env:get_objects_inside_radius(self.object:getpos(), 5)) do
-		if not object:is_player() then
-			if object:get_luaentity().name == "english4kids:npc_welcomer" then
+    if not object:is_player() then
+      if object:get_luaentity().name == "english4kids:npc_welcomer" then
 				print("hello! can you help me?")
         object:get_luaentity().state = 3
 				object:get_luaentity().attacker = puncher:get_player_name()
@@ -115,6 +119,7 @@ NPC_ENTITY_DEF.on_punch = function(self, puncher)
 	if self.object:get_hp() == 0 then
 	    local obj = minetest.env:add_item(self.object:getpos(), "default:stone_with_iron 10")
 	end
+  ]]--
 end
 
 NPC_ENTITY_DEF.on_step = function(self, dtime)

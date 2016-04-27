@@ -7,24 +7,26 @@ else
   S = function ( s ) return s end
 end
 
+local IMMORTAL_NODES = nil
+
 minetest.register_node("darkage:basalt_cobble", {
 	description = S("basalt cobble"),
 	tiles = {"darkage_basalt_cobble.png"},
-	groups = {immortal=1},
+	groups = {immortal=IMMORTAL_NODES},
 	sounds = default.node_sound_stone_defaults()
 })
 
 minetest.register_node("darkage:basalt_brick", {
 	description = S("basalt brick"),
 	tiles = {"darkage_basalt_brick.png"},
-	groups = {immortal=1},
+	groups = {immortal=IMMORTAL_NODES},
 	sounds = default.node_sound_stone_defaults()
 })
 
 minetest.register_node("darkage:stone_brick", {
 	description = S("stone brick"),
 	tiles = {"darkage_stone_brick.png"},
-	groups = {immortal=1},
+	groups = {immortal=IMMORTAL_NODES},
 	sounds = default.node_sound_stone_defaults()
 })
 
@@ -32,7 +34,7 @@ minetest.register_node("darkage:stone_brick", {
 minetest.register_node("darkage:straw", {
 	description = S("straw"),
 	tiles = {"darkage_straw.png"},
-	groups = {immortal=1},
+	groups = {immortal=IMMORTAL_NODES},
 	sounds = default.node_sound_leaves_defaults(),
 })
 
@@ -41,14 +43,14 @@ minetest.register_node("darkage:lamp", {
 	tiles = {"darkage_lamp.png"},
 	paramtype = "light",
 	light_source = 18,
-	groups = {immortal=1},
+	groups = {immortal=IMMORTAL_NODES},
 	sounds = default.node_sound_glass_defaults(),
 })
 
 minetest.register_node("darkage:marble_tile", {
 	description = S("marble tile"),
 	tiles = {"darkage_marble_tile.png"},
-	groups = {immortal=1},
+	groups = {immortal=IMMORTAL_NODES},
 	sounds = default.node_sound_stone_defaults()
 })
 
@@ -59,7 +61,7 @@ minetest.register_node("darkage:glass", {
 	tiles = {"darkage_glass.png"},
 	paramtype = "light",
 	sunlight_propagates = true,
-	groups = {immortal=1},
+	groups = {immortal=IMMORTAL_NODES},
 	sounds = default.node_sound_glass_defaults(),
 })
 
@@ -72,7 +74,7 @@ minetest.register_node("darkage:wood_bars", {
 	wield_image = "darkage_wood_bars.png",
 	paramtype = "light",
 	sunlight_propagates = true,
-	groups = {immortal=1},
+	groups = {immortal=IMMORTAL_NODES},
 	sounds = default.node_sound_wood_defaults()
 })
 
@@ -84,7 +86,7 @@ minetest.register_node("darkage:wood_grille", {
 	wield_image = "darkage_wood_grille.png",
 	paramtype = "light",
 	sunlight_propagates = true,
-	groups = {immortal=1},
+	groups = {immortal=IMMORTAL_NODES},
 	sounds = default.node_sound_wood_defaults()
 })
 
@@ -96,7 +98,7 @@ minetest.register_node("darkage:wood_frame", {
 	wield_image = "darkage_wood_frame.png",
 	paramtype = "light",
 	sunlight_propagates = true,
-	groups = {immortal=1},
+	groups = {immortal=IMMORTAL_NODES},
 	sounds = default.node_sound_wood_defaults()
 })
 
@@ -108,7 +110,7 @@ minetest.register_node("darkage:iron_bars", {
 	wield_image = "darkage_iron_bars.png",
 	paramtype = "light",
 	sunlight_propagates = true,
-	groups = {immortal=1},
+	groups = {immortal=IMMORTAL_NODES},
 	sounds = default.node_sound_stone_defaults()
 })
 
@@ -119,6 +121,6 @@ minetest.register_node("darkage:iron_grille", {
 	inventory_image = "darkage_iron_grille.png",
 	sunlight_propagates = true,
 	paramtype = "light",
-	groups = {immortal=1},
+	groups = {immortal=IMMORTAL_NODES},
 	sounds = default.node_sound_stone_defaults()
 })

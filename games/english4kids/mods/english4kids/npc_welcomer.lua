@@ -173,18 +173,18 @@ end
 	]]--
 
 	--set npc to hostile in night, and revert npc back to peaceful in daylight
-	if minetest.env:get_timeofday() >= 0 and minetest.env:get_timeofday() < 0.25 and self.state ~= 4 then
+	--[[if minetest.env:get_timeofday() >= 0 and minetest.env:get_timeofday() < 0.25 and self.state ~= 4 then
 		self.state = 4
 	elseif minetest.env:get_timeofday() > 0.25 and self.state == 4 then
 		self.state = 1
-	end
+	end]]--
 	--if mob is not in attack or hostile mode, set mob to walking or standing
-	if self.state < 3 then
+	--[[if self.state < 3 then
 		if self.timer > math.random(1,20) then
 			self.state = math.random(1,2)
 			self.timer = 0
 		end
-	end
+	end]]--
 	--STANDING
 	if self.state == 1 then
 		self.yawwer = true

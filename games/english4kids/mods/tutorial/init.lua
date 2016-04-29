@@ -1,7 +1,7 @@
 tutorial = {}
 
 -- in order to be able to edit the map, allow us to make nodes modifiable: 
-local IMMORTAL_NODES = nil
+local IMMORTAL_NODES = 1
 
 -- intllib support
 local S

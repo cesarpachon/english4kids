@@ -99,8 +99,9 @@ end
 NPC_ENTITY_DEF.on_punch = function(self, puncher)
 	if puncher:is_player() then
     local playername = puncher:get_player_name()
-    minetest.chat_send_player(playername, "Hello "..playername..", can you help me?")
-    e4k.dialogs.show_default_dialog(playername, "welcome!", "Hello "..playername..", can you help me?")
+    minetest.chat_send_player(playername, "Hello, may you help me?")
+    e4k.dialogs.show_default_dialog(playername, "welcome!", "Hello, can you help me?")
+    minetest.sound_play("hello_may_you_help_me", {to_player= playername})
   end
   --[[
 	for  _,object in ipairs(minetest.env:get_objects_inside_radius(self.object:getpos(), 5)) do

@@ -7,7 +7,7 @@ else
   S = function ( s ) return s end
 end
 
-local IMMORTAL_NODES = nil
+local IMMORTAL_NODES = 1
 
 minetest.register_node("castle:light",{
 	drawtype = "glasslike",

@@ -2,7 +2,8 @@
 e4k = {}
 
 dofile(minetest.get_modpath("english4kids").."/dialogs.lua")
-dofile(minetest.get_modpath("english4kids").."/npc_welcomer.lua")
+dofile(minetest.get_modpath("english4kids").."/common.lua")
+dofile(minetest.get_modpath("english4kids").."/npc_welcomer2.lua")
 
 -- Saves tutorial state into file
 function e4k.save_state()

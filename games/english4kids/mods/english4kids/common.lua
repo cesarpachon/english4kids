@@ -36,3 +36,9 @@ function npc_get_animations_def()
 		}
 end
 
+function _debug(t)
+  for i, v in ipairs(t) do
+    print(i, v) 
+  end
+end
+

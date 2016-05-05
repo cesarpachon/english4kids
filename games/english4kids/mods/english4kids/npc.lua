@@ -33,48 +33,49 @@ e4k.NPC.on_activate = function(self)
 end
 
 
-e4k.NPC.set_behavior = function(self, behavior)
+e4k.NPC.set_behavior = function(entity, behavior)
   print("set_behavior ")
   --make persistent the behavior type
-  local pos = self.getpos(self)
+  local pos = entity.object:getpos()
   print(pos)
   local meta = minetest.get_meta(pos)
   print(meta)
   local class = behavior["class"]
   print(class)
   meta:set_string("behavior", class)
+
+  --lets see if worked..
+  --e4k.NPC.get_behavior(sao)
 end
 
-e4k.NPC.get_behavior = function(self)
+e4k.NPC.get_behavior = function(entity)
   print("get_behavior")
-  if self.behavior ~= nil then
+  if entity.behavior ~= nil then
     print("found behavior")
   else 
-    print("not found behavior")
-    local pos = self.object:getpos()
-    print(pos)
+    local pos = entity.object:getpos()
     local meta = minetest.get_meta(pos)
-    print(meta)
     local class = meta.get_string(meta, "behavior")
-    print(class)
     if class == nil or class == "" then
       print("no class")
       return
     end
-    self.behavior = e4k.behaviors[class]
-    print(self.behavior)
+    local template = e4k.behaviors[class]
+    entity.behavior = shallowcopy(template)
   end
-  return self.behavior
+  print("returning get_behavior:" )
+  print(entity.behavior.class)
+  return entity.behavior
 end
 
 e4k.NPC.on_init = function(self)
   e4k.NPC.get_behavior().init(self)
 end
 
-e4k.NPC.on_punch = function(self, puncher)
-	local b = self.get_behavior(self)
+e4k.NPC.on_punch = function(entity, puncher)
+	local b = entity:get_behavior()
   if b ~= nil then
-    b.on_punch(self, puncher)
+    b:on_punch(puncher)
   else
     print("ERROR: behavor is nul")
   end

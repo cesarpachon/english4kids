@@ -25,30 +25,34 @@ end
 
 -- set the value of a integer metadata
 function e4k.setMetadataInt(player, key, ival)
-  local pos = player:getpos()
+  local pos = {x=0, y=0, z=0}--player:getpos()
   local meta = minetest.get_meta(pos)
+  print("setInt: "..player:get_player_name().." "..key.." " .. tostring(ival))
   meta:set_int(key, ival)
 end
 
 -- increment a integer metadata
 function e4k.incMetadataInt(player, key, ival)
   local v = e4k.getMetadataInt(player, key)
-  e4k.setMetadataInt(player, key, v + ival)
+  v = v + ival
+  print("incInt: "..player:get_player_name().." "..key.." " .. tostring(v))
+  e4k.setMetadataInt(player, key, v)
 end
 
 -- get a integer metadata. returns 0 if no exist
 function e4k.getMetadataInt(player, key)
-  local pos = player:getpos()
+  local pos = {x=0, y=0, z=0}--player:getpos()
   local meta = minetest.get_meta(pos)
-  return meta:get_int(key)
+  local val = meta:get_int(key)
+  print("getInt: "..player:get_player_name().." "..key.." " .. tostring(val))
+  return val
 end
 
 --add or substract coins. update HUD
 function e4k.incCoins(player, deltaCoins)
+  print("inc coins: "..player:get_player_name().." "..tostring(deltaCoins))
   e4k.incMetadataInt(player, "coins", deltaCoins)
-  local coins = e4k.getMetadataInt(player, "coins")
-  local hud_coins = e4k.getMetadataInt(player, "hud_coins")
-  player:hud_change(hud_coins, "text", "COINS:"..tostring(coins))
+  e4k.refreshHud(player)
 end
 
 

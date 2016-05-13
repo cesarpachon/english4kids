@@ -1,21 +1,21 @@
 breath = 11
 hp = 20
 name = singleplayer
-pitch = 2.89
-position = (418.12,5,272.07)
+pitch = 11.92
+position = (481.27,5,348.66)
 version = 1
-yaw = 85.71
+yaw = -332.59
 PlayerArgsEnd
 List main 32
 Width 0
-Item default:stone_with_iron 99
-Item default:stone_with_coal 5
-Item default:stone_with_iron 99
-Item default:stone_with_iron 52
-Item default:coal_lump
+Item darkage:basalt_brick
+Item default:cobble
+Item default:stonebrick
+Item castle:light
+Item admin_tools:remove_stick
+Item darkage:iron_grille
 Empty
-Empty
-Empty
+Item darkage:stone_brick
 Empty
 Empty
 Empty

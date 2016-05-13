@@ -1,1 +1,1 @@
-return {["first_join"] = false}
+return {["coins"] = 10, ["first_join"] = false}

@@ -143,4 +143,4 @@ end
     end
 end
 
-minetest.register_entity("english4kids:npc_welcomer", e4k.NPC)
+minetest.register_entity("english4kids:npc", e4k.NPC)

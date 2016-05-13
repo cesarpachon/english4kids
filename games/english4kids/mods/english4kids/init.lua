@@ -8,6 +8,7 @@ dofile(minetest.get_modpath("english4kids").."/dialogs.lua")
 dofile(minetest.get_modpath("english4kids").."/common.lua")
 dofile(minetest.get_modpath("english4kids").."/npc.lua")
 dofile(minetest.get_modpath("english4kids").."/behavior_welcomer.lua")
+dofile(minetest.get_modpath("english4kids").."/hud.lua")
 
 -- Saves tutorial state into file
 function e4k.save_state()
@@ -28,27 +29,9 @@ end
 function e4k.create()
   print("e4k.create: first time here? let's create everything..")
   local pos = { x=46, y=2, z=36}
-  local sao = minetest.env:add_entity(pos, ("english4kids:npc_welcomer"))
-  -- manual trigger init behavior. lets hope activate will trigger for existing nodes!  
-  print("got new sao")
-  --sao is userdata
+  local sao = minetest.env:add_entity(pos, ("english4kids:npc"))
   local entity = sao:get_luaentity()
-  --print("got entity")
-  --print(entity)
-  --print(entity.name)
-  --print(entity.behavior)
-  --print("calling custom entity method")
   entity:set_behavior(e4k.behaviors["welcomer"])
-
- -- print(obj:getpos())
-  --e4k.NPC.set_behavior(obj, "welcomer")
-  
-  --_debug(npc)
-  --npc.set_behavior(e4k.behaviors["welcomer"])
-  --npc.init()
-  
-  --e4k.state.first_join = false
-  --e4k.save_state()
   minetest.after(1, function()
     print("First Environment step run")
   end)
@@ -71,15 +54,17 @@ if file then
 end
 if(read==false) then
 	e4k.state = {}
-	-- Is this the first time the player joins this e4k?
 	e4k.state.first_join = true
-	-- These variables store wheather a message for those events has been shown yet.
+  e4k.state.coins = 10
 end
 
-minetest.register_on_joinplayer(function()
-  --if(e4k.state.first_join) then
+minetest.register_on_joinplayer(function(player)
+  if(e4k.state.first_join) then
     e4k.create()
-  --end
+  end
+  e4k.attachHud(player)
+  e4k.state.first_join = false
+  e4k.save_state()
 end)
 
 print("english4kids loaded!")

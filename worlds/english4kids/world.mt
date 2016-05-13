@@ -1,7 +1,7 @@
 gameid = english4kids
 backend = sqlite3
-creative_mode = false
-enable_damage = true
+creative_mode = true
+enable_damage = false
 server_announce = false
 load_mod_3d_armor = false
 load_mod_3dmushrooms = false
@@ -53,3 +53,4 @@ load_mod_youngtrees = false
 load_mod_biome_lib = true
 load_mod_english4kids = true
 load_mod_peaceful_npc = false
+load_mod_painting = false

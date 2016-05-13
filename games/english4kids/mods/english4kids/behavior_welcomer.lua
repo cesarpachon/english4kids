@@ -17,11 +17,14 @@ WELCOMER.step = function(self, dtime)
   
 end
 
-WELCOMER.on_punch = function(self, puncher)
-  if not puncher:is_player() then
+WELCOMER.on_punch = function(self, player)
+  if not player:is_player() then
     return
   end
-  local playername = puncher:get_player_name()
+  
+  e4k.incCoins(player, 1) 
+
+  local playername = player:get_player_name()
   self.click_counter = self.click_counter +  1; 
   print(self.click_counter) 
    --only audio

@@ -37,15 +37,9 @@ e4k.NPC.set_behavior = function(entity, behavior)
   print("set_behavior ")
   --make persistent the behavior type
   local pos = entity.object:getpos()
-  print(pos)
   local meta = minetest.get_meta(pos)
-  print(meta)
   local class = behavior["class"]
-  print(class)
   meta:set_string("behavior", class)
-
-  --lets see if worked..
-  --e4k.NPC.get_behavior(sao)
 end
 
 e4k.NPC.get_behavior = function(entity)
